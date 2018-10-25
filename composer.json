@@ -1,5 +1,5 @@
 {
-    "name": "kudobuzz/activecampaign-library-php",
+    "name": "kudobuzz/event-tagmanger-php",
     "description": "Boilerplate package for creating other packages.",
     "keywords": ["template", "composer", "package"],
     "license": "DBAD",
@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "kudobuzz\\activecampaign-library-php\\": "src/"
+            "kudobuzz\\event-tagmanger-php\\": "src/"
         }
     }
 }

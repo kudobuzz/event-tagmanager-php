@@ -2,7 +2,7 @@
 require_once("vendor/activecampaign/api-php/includes/ActiveCampaign.class.php");
 require_once("src/Validation.php");
 
-class ActiveCampaignLibrary extends Validation{
+class EventTagManger extends Validation{
 
 
     private $ac;
@@ -59,5 +59,10 @@ class ActiveCampaignLibrary extends Validation{
     }
 
 
+    //add tags when user is on pricing page
+    public function addTagsOnPricingPage(){
+
+
+    }
 
 }
