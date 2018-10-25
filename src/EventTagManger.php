@@ -1,15 +1,20 @@
 <?php 
-require_once("vendor/activecampaign/api-php/includes/ActiveCampaign.class.php");
-require_once("src/Validation.php");
-
-class EventTagManger extends Validation{
+require_once("src/require.php");
+class EventTagManger {
 
 
-    private $ac;
+    private $activecampaign;
+    private $platform;
+    private $app;
 
-    public function __construct ($apiKey, $apiURL) {
+    public function __construct ($data) {
+        foreach(get_object_vars($this) as $key=>$value ){
+			if( array_key_exists($key, $data) ){
+				$this->{$key} = $data[$key];
+			}
+        }
 
-        $this->ac = new ActiveCampaign($apiKey,  $apiURL);
+        $this->activecampaign = new ActiveCampaignLib();
     }
 
 
@@ -23,39 +28,30 @@ class EventTagManger extends Validation{
             'list_id'
         ];
 
-        $this->validate($requiredDetails, $contactDetails);
-        $contact_sync = $this->ac->api("contact/sync", $contactDetails);
+        $contactDetails['list_id'] = LIST_ID;
 
-        if(!(int)$contact_sync->success) {
-            // request failed
-            throw new Excepgtion($contact_sync->error);
-        }
-
+        $this->activecampaign->addNewContact($requiredDetails, $contactDetails);
     }
 
     //add tags to contact on activecampaign
     public function addTagsOnInstall($contactTags){
 
+        
         $requiredTags = [
             'email',
-            'main_category',
-            'product_category_interest',
-            'product_sub_category_interest',
-            'purchase_status',
-            'newsletter',
+            'location',
+            'country_code',
+            'interest_category',
+            'interest_product'
             
         ];
-        $this->validate($requiredTags, $contactTags);
+    
+        $contactTags['interest_category'] = "interest-category-$this->app";
+        $contactTags['interest_product'] = "interest-product-$this->platform";
+        $contactTags['purchase_status'] = FREEMIUM;
+        $contactTags['plan'] = "plan-free-$this->app";
 
-
-        $post['email'] = $userData['email'];
-        $post['tags'][] = $userData['main_category'];
-        $post['tags'][] = $userData['product_category_interest'];
-        $post['tags'][] = $userData['product_sub_category_interest'];
-        $post['tags'][] = $userData['purchase_status'];
-        $post['tags'][] = $userData['newsletter'];
-        $this->ac->api("contact/tag_add", $post );
-
+        $this->activecampaign->addTags($requiredTags, $contactTags);
     }
 
 
