@@ -41,6 +41,40 @@ class ActiveCampaignLib extends Validation{
 
     }
 
+    public function removeTagsOnUpgrade($email, $app, $platform){
+
+       $contact =  $this->ac->api("contact/view?email=$email");
+       $data[SINGLEPRODUCT_PAIDPLAN] = array_search(SINGLEPRODUCT_PAIDPLAN, $contact->tags);
+       $data[MULTIPLEPRODUCT_PAIDPLAN] = array_search(MULTIPLEPRODUCT_PAIDPLAN, $contact->tags);
+       
+
+
+        //add tag multiple product paid plan if user has tag single product paid plan and remove sigle product paid plan tag
+        if($data[SINGLEPRODUCT_PAIDPLAN] != fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
+            $post['tags'][] = SINGLEPRODUCT_PAIDPLAN;
+        }
+
+
+       $post['email'] = $email;
+       $post['tags'][] = FREEMIUM;
+       $post['tags'][] = PLAN_FREE.$app;
+       $this->ac->api("contact/tag_remove", $post );
+
+       return $data;
+    }
+
+    public function getTags($email){
+
+        $contact =  $this->ac->api("contact/view?email=$email");
+        return $contact->tags;
+    }
+
+    public function removeTags(){
+
+
+        $this->ac->api("contact/tag_remove", $post );
+ 
+    }
 
 
 }

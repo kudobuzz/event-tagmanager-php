@@ -40,25 +40,64 @@ class EventTagManger {
         $requiredTags = [
             'email',
             'location',
-            'country_code',
-            'interest_category',
-            'interest_product'
-            
+            'country_code'    
         ];
     
-        $contactTags['interest_category'] = "interest-category-$this->app";
-        $contactTags['interest_product'] = "interest-product-$this->platform";
-        $contactTags['purchase_status'] = FREEMIUM;
-        $contactTags['plan'] = "plan-free-$this->app";
+        $contactTags[] = "interest-category-$this->app";
+        $contactTags[] = "interest-product-$this->platform";
+        $contactTags[] = FREEMIUM;
+        $contactTags[] = PLAN_FREE.$this->app;
 
         $this->activecampaign->addTags($requiredTags, $contactTags);
     }
 
-
     //add tags when user is on pricing page
-    public function addTagsOnPricingPage(){
+    public function addTagsOnUpgrade($contactTags, $plan){
+
+        $tagsToRemove['email'] = $contactTags['email'];
+        $requiredTags = ['email'] ;
+    
+        $contactTags[] = VIEWED_SUBSCRIPTION_PAGE;
+        $contactTags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
+        $contactTags[] = SINGLEPRODUCT_PAIDPLAN;
+        $contactTags[] = PAIDPLAN_CATEGORY.$this->app;
+        $contactTags[] = PAIDPLAN_PRODUCT.$this->platform;
+        $contactTags[] = FULLPRICE_PAIDPLAN;
+        $contactTags[] = "paidplan-$plan->name-$this->app";
+        $contactTags[] = CUSTOMER;
+
+        if(isset($plan->discount) and $plan->discount == 1){
+            $contactTags[] = DISCOUNT_PAIDPLAN;
+        }
+
+        $data = $this->activecampaign->removeTagsOnUpgrade($contactTags['email'], $this->app, $this->platform);
+
+        if($data[SINGLEPRODUCT_PAIDPLAN] === fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
+            $contactTags[] = SINGLEPRODUCT_PAIDPLAN;
+        }
+
+        //add tag multiple product paid plan if user has tag single product paid plan and remove sigle product paid plan tag
+        if($data[SINGLEPRODUCT_PAIDPLAN] != fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
+            $contactTags[] = MULTIPLEPRODUCT_PAIDPLAN;
+        }
+        
+
+        $this->activecampaign->addTags($requiredTags, $contactTags);
+
+        return ['existingTags'=>$data, 'addedTags'=> $contactTags];
+    }
+
+    public function removeTagsOnUpgrade(){
 
 
+        $this->activecampaign->removeTags($tagsToRemove);
+    }
+
+
+    //get user tags
+    public function getUserTags($email){
+        
+        return  $this->activecampaign->getTags($email);;
     }
 
 }
