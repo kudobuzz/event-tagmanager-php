@@ -37,9 +37,24 @@ class ActiveCampaignLib extends Validation{
             $post['tags'][] = $tag;
         }
 
-        $this->ac->api("contact/tag_add", $post );
+        return $this->ac->api("contact/tag_add", $post );
 
     }
+
+    public function removeTags($contactTags){
+
+        $post['email'] = $contactTags['email'];
+        unset($contactTags['email']);
+
+        foreach($contactTags as $tag){
+            $post['tags'][] = $tag;
+        }
+
+
+        return $this->ac->api("contact/tag_remove", $post);
+ 
+    }
+
 
     public function removeTagsOnUpgrade($email, $app, $platform){
 
@@ -47,13 +62,10 @@ class ActiveCampaignLib extends Validation{
        $data[SINGLEPRODUCT_PAIDPLAN] = array_search(SINGLEPRODUCT_PAIDPLAN, $contact->tags);
        $data[MULTIPLEPRODUCT_PAIDPLAN] = array_search(MULTIPLEPRODUCT_PAIDPLAN, $contact->tags);
        
-
-
         //add tag multiple product paid plan if user has tag single product paid plan and remove sigle product paid plan tag
         if($data[SINGLEPRODUCT_PAIDPLAN] != fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
             $post['tags'][] = SINGLEPRODUCT_PAIDPLAN;
         }
-
 
        $post['email'] = $email;
        $post['tags'][] = FREEMIUM;
@@ -69,12 +81,7 @@ class ActiveCampaignLib extends Validation{
         return $contact->tags;
     }
 
-    public function removeTags(){
 
-
-        $this->ac->api("contact/tag_remove", $post );
- 
-    }
 
 
 }

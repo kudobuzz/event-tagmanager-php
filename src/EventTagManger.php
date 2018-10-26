@@ -59,7 +59,6 @@ class EventTagManger {
     
         $contactTags[] = VIEWED_SUBSCRIPTION_PAGE;
         $contactTags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
-        $contactTags[] = SINGLEPRODUCT_PAIDPLAN;
         $contactTags[] = PAIDPLAN_CATEGORY.$this->app;
         $contactTags[] = PAIDPLAN_PRODUCT.$this->platform;
         $contactTags[] = FULLPRICE_PAIDPLAN;
@@ -87,17 +86,35 @@ class EventTagManger {
         return ['existingTags'=>$data, 'addedTags'=> $contactTags];
     }
 
-    public function removeTagsOnUpgrade(){
-
-
-        $this->activecampaign->removeTags($tagsToRemove);
+    //get user tags
+    public function getTags($email){
+        
+        return  $this->activecampaign->getTags($email);;
     }
 
 
-    //get user tags
-    public function getUserTags($email){
-        
-        return  $this->activecampaign->getTags($email);;
+    public function downgradeToFreemium($contactTags,  $plan){
+        $requiredTags = ['email'];
+
+        $tags['email'] = $contactTags['email'];
+        $tags[] = VIEWED_SUBSCRIPTION_PAGE;
+        $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
+        $tags[] = PAIDPLAN_CATEGORY.$this->app;
+        $tags[] = PAIDPLAN_PRODUCT.$this->platform;
+        $tags[] = FULLPRICE_PAIDPLAN;
+        $tags[] = "paidplan-$plan->name-$this->app";
+        $tags[] = CUSTOMER;
+        $tags[] = DISCOUNT_PAIDPLAN;
+        $tags[] = SINGLEPRODUCT_PAIDPLAN;
+        $tags[] = MULTIPLEPRODUCT_PAIDPLAN;
+
+       
+
+        $this->activecampaign->removeTags($tags);
+        $contactTags[] = FREEMIUM;
+        $contactTags[] = PLAN_FREE.$this->app;
+
+        $this->activecampaign->addTags($requiredTags, $contactTags);
     }
 
 }
