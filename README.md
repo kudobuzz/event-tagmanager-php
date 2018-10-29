@@ -26,8 +26,9 @@ example app name can be `seodoctor` and platfrom can be `shopify`
 
 set env for `ACTIVECAMPAIGN_API_URL` and `ACTIVECAMPAIGN_API_KEY`
 
-examples.php
-adding contact to event tag manger
+
+adding contact to event tag manger <br>
+examples.php 
 ```
 require_once "src/EventTagManger.php";
 
