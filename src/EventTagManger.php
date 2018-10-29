@@ -135,7 +135,7 @@ class EventTagManger {
         $uninstallTags[] = PLAN_FREE.$this->app;
         $this->activecampaign->removeTags($uninstallTags);
 
-        $contactTags[] = UNINSTALL_SEODOCTOR;
+        $contactTags[] = UNINSTALL.$this->app;
         $this->activecampaign->addTags($requiredTags, $contactTags);
 
 
