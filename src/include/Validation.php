@@ -4,7 +4,7 @@ class Validation{
 
     public function envCheck(){
         
-        $neededKeys = unserialize(ENV_VARIABLES);
+        $neededKeys = unserialize(ENV_VARIABLES_EVENT);
 
         $missingVariable = [];
         foreach ($neededKeys as $key) {
