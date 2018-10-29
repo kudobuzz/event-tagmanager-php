@@ -62,7 +62,7 @@ class EventTagManger {
         $contactTags[] = PAIDPLAN_CATEGORY.$this->app;
         $contactTags[] = PAIDPLAN_PRODUCT.$this->platform;
         $contactTags[] = FULLPRICE_PAIDPLAN;
-        $contactTags[] = PAIDPLAN.$plan->name-$this->app;
+        $contactTags[] = PAIDPLAN."$plan->name-$this->app";
         $contactTags[] = CUSTOMER;
 
         if(isset($plan->discount) and $plan->discount == 1){
@@ -102,7 +102,7 @@ class EventTagManger {
         $tags[] = PAIDPLAN_CATEGORY.$this->app;
         $tags[] = PAIDPLAN_PRODUCT.$this->platform;
         $tags[] = FULLPRICE_PAIDPLAN;
-        $tags[] = "paidplan-$plan->name-$this->app";
+        $tags[] = PAIDPLAN."$plan->name-$this->app";
         $tags[] = CUSTOMER;
         $tags[] = DISCOUNT_PAIDPLAN;
         $tags[] = SINGLEPRODUCT_PAIDPLAN;
@@ -126,7 +126,7 @@ class EventTagManger {
         $uninstallTags[] = PAIDPLAN_CATEGORY.$this->app;
         $uninstallTags[] = PAIDPLAN_PRODUCT.$this->platform;
         $uninstallTags[] = FULLPRICE_PAIDPLAN;
-        $uninstallTags[] = PAIDPLAN.$plan->name-$this->app;
+        $uninstallTags[] = PAIDPLAN."$plan->name-$this->app";
         $uninstallTags[] = CUSTOMER;
         $uninstallTags[] = DISCOUNT_PAIDPLAN;
         $uninstallTags[] = SINGLEPRODUCT_PAIDPLAN;
