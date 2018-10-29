@@ -27,7 +27,7 @@ example app name can be `seodoctor` and platfrom can be `shopify`
 set env for `ACTIVECAMPAIGN_API_URL` and `ACTIVECAMPAIGN_API_KEY`
 
 
-adding contact to event tag manger <br>
+adding contact to event tag manger <br><br>
 examples.php 
 ```
 require_once "src/EventTagManger.php";
@@ -54,7 +54,7 @@ try{
 
 
 ```
-
+<br><br>
 adding tags on install
 ```
 
@@ -74,7 +74,7 @@ interest-product-{app}
 freemium
 plan-free-{app}
 ```
-
+<br><br>
 adding tags on upgrade
 ```
     $requiredTags = [
