@@ -66,7 +66,7 @@ adding tags on install
     $eventTagManger->addTagsOnInstall($requiredTags);
 ```
 
-You can pass additional tags, by default these tags are added on install
+You can pass additional tags, by default these tags are added  when you call addTagsOnInstall method on install
 ```
 interest-category-{platform}
 interest-product-{app}
@@ -74,3 +74,32 @@ freemium
 plan-free-{app}
 ```
 
+adding tags on upgrade
+```
+    $requiredTags = [
+        'email'=>'test@kudobuzz.com'
+    ];
+
+    $plan = (object) ['name'=>'pro'];
+    $test = $eventTagManger->addTagsOnUpgrade($requiredTags,$plan);
+```
+You can pass additional tags, by default these tags are added on upgrade when you call addTagsOnUpgrade method 
+```
+viewed-subscription-page
+initiated-subscription-checkout
+paidplan-category-{app}
+paidplan-product-{platform}
+price-fullprice-paidplan
+singleproduct-paidplan/multipleproduct-paidplan
+paidplan-{planname}-seodoctor
+customer
+
+
+//by default these tags are removed 
+plan-free-{app}
+freemium
+
+
+//set discount key with value 1 to add discount tag to contact $plan = (object) ['name'=>'pro’, ‘discount’=>1];
+ discount-paidplan
+```
