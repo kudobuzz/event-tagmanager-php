@@ -58,13 +58,15 @@ try{
 adding tags on install
 ```
 
-    $contactTags = [
+    $contact = [
         'email'=>'elijah@kudobuzz.com',
-        'location'=>'Ghana',
-        'country_code'=>'GH'
+        'tags'=>[
+            'Ghana',
+            'GH',
+        ]
     ];
 
-    $eventTagManger->addTagsOnInstall($contactTags);
+    $eventTagManger->onInstall($contact);
 ```
 
 You can pass additional tags, by default these tags are added  when you call `addTagsOnInstall` method on install
@@ -77,12 +79,12 @@ plan-free-{app}
 <br><br>
 adding and removing tags on upgrade
 ```
-    $contactTags = [
-        'email'=>'test@kudobuzz.com'
-    ];
 
+    $contact = [
+        'email'=>'elijah@kudobuzz.com'
+    ];
     $plan = (object) ['name'=>'pro'];
-    $test = $eventTagManger->addTagsOnUpgrade($contactTags,$plan);
+    $eventTagManger->onUpgrade($contact, $plan);
 ```
 You can pass additional tags, by default these tags are added on upgrade when you call `addTagsOnUpgrade` method 
 ```
@@ -109,12 +111,12 @@ freemium
 <br><br>
 adding and removing tags on plan downgrade to free plan
 ```
-    $contactTags = [
+    $contact = [
         'email'=>'test@kudobuzz.com'
     ];
 
     $plan = (object) ['name'=>'pro'];
-    $eventTagManger->downgradeToFreemium($contactTags,$plan);
+    $eventTagManger->downgradeToFreemium($contact,$plan);
 ```
 You can pass additional tags, by default these tags are added on upgrade when you call `downgradeToFreemium` method 
 ```
