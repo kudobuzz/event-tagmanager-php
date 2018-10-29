@@ -22,9 +22,9 @@ Next, create a class instance of EventTagManger:
 
 $et = new EventTagManger(['app'=>'appname','platform'=>'platformname']);
 
-example app name can be seodoctor and platfrom can be shopify
+example app name can be `seodoctor` and platfrom can be `shopify`
 
-set env for ACTIVECAMPAIGN_API_URL and ACTIVECAMPAIGN_API_KEY
+set env for `ACTIVECAMPAIGN_API_URL` and `ACTIVECAMPAIGN_API_KEY`
 
 examples.php
 adding contact to event tag manger
