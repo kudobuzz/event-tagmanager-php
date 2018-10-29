@@ -25,33 +25,19 @@ class ActiveCampaignLib extends Validation{
     }
 
     //add tags to contact on activecampaign
-    public function addTags($requiredTags, $contactTags){
+    public function addTags($contactTags){
+
+        $requiredTags = ['email'];
 
         $this->validate($requiredTags, $contactTags);
 
-
-        $post['email'] = $contactTags['email'];
-        unset($contactTags['email']);
-
-        foreach($contactTags as $tag){
-            $post['tags'][] = $tag;
-        }
-
-        return $this->ac->api("contact/tag_add", $post );
+        return $this->ac->api("contact/tag_add", $contactTags );
 
     }
 
     public function removeTags($contactTags){
 
-        $post['email'] = $contactTags['email'];
-        unset($contactTags['email']);
-
-        foreach($contactTags as $tag){
-            $post['tags'][] = $tag;
-        }
-
-
-        return $this->ac->api("contact/tag_remove", $post);
+        return $this->ac->api("contact/tag_remove", $contactTags);
  
     }
 

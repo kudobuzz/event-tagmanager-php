@@ -1,11 +1,11 @@
 <?php 
 require_once("src/require.php");
-class EventTagManger {
+class EventTagManger extends EventTagMangerlib {
 
 
-    private $activecampaign;
-    private $platform;
-    private $app;
+    public $activecampaign;
+    public $platform;
+    public $app;
 
     public function __construct ($data) {
         foreach(get_object_vars($this) as $key=>$value ){
@@ -34,111 +34,59 @@ class EventTagManger {
     }
 
     //add tags to contact on activecampaign
-    public function addTagsOnInstall($contactTags){
+    public function onInstall($contact){
 
-        
-        $requiredTags = [
-            'email',
-            'location',
-            'country_code'    
-        ];
-    
-        $contactTags[] = INTEREST_CATEGORY.$this->app;
-        $contactTags[] = INTEREST_PRODUCT.$this->platform;
-        $contactTags[] = FREEMIUM;
-        $contactTags[] = PLAN_FREE.$this->app;
-
-        $this->activecampaign->addTags($requiredTags, $contactTags);
+        $tagsToAdd = $this->eventTagsAdd((object) ['name'=>'install']);
+        $contact['tags']  = array_merge($contact['tags'] , $tagsToAdd);
+        $this->activecampaign->addTags($contact);
     }
 
     //add tags when user is on pricing page
-    public function addTagsOnUpgrade($contactTags, $plan){
+    public function onUpgrade($contact, $plan){
 
-        $tagsToRemove['email'] = $contactTags['email'];
-        $requiredTags = ['email'] ;
-    
-        $contactTags[] = VIEWED_SUBSCRIPTION_PAGE;
-        $contactTags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
-        $contactTags[] = PAIDPLAN_CATEGORY.$this->app;
-        $contactTags[] = PAIDPLAN_PRODUCT.$this->platform;
-        $contactTags[] = FULLPRICE_PAIDPLAN;
-        $contactTags[] = PAIDPLAN."$plan->name-$this->app";
-        $contactTags[] = CUSTOMER;
+        $removeTags['email'] = $contact['email'];
+        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'upgrade']);
+        $this->activecampaign->removeTags($removeTags);
 
-        if(isset($plan->discount) and $plan->discount == 1){
-            $contactTags[] = DISCOUNT_PAIDPLAN;
-        }
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade']);
+        $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
+        $this->activecampaign->eventTagsAdd($contact);
 
-        $data = $this->activecampaign->removeTagsOnUpgrade($contactTags['email'], $this->app, $this->platform);
+    }
 
-        if($data[SINGLEPRODUCT_PAIDPLAN] === fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
-            $contactTags[] = SINGLEPRODUCT_PAIDPLAN;
-        }
 
-        //add tag multiple product paid plan if user has tag single product paid plan and remove sigle product paid plan tag
-        if($data[SINGLEPRODUCT_PAIDPLAN] != fase || $data[MULTIPLEPRODUCT_PAIDPLAN] === fase){
-            $contactTags[] = MULTIPLEPRODUCT_PAIDPLAN;
-        }
-        
+    public function downgradeToFreemium($contact,  $plan){
 
-        $this->activecampaign->addTags($requiredTags, $contactTags);
+        $removeTags['email'] = $contact['email'];
+        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'downgrade']);
+        $this->activecampaign->removeTags($removeTags);
+       
 
-        return ['existingTags'=>$data, 'addedTags'=> $contactTags];
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade']);
+        $this->activecampaign->addTags($contact);
+    }
+
+    public function onUninstall($contact,  $plan){
+
+        $removeTags['email'] = $contact['email'];
+        $removeTags['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade']);
+        $this->activecampaign->removeTags($removeTags);
+
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'uninstall']);
+        $this->activecampaign->addTags($contact);
+
+
+    }
+
+    public function addTag($contact){
+
+        $this->activecampaign->addTags($contact);
     }
 
     //get user tags
     public function getTags($email){
-        
+    
         return  $this->activecampaign->getTags($email);;
-    }
-
-
-    public function downgradeToFreemium($contactTags,  $plan){
-        $requiredTags = ['email'];
-
-        $tags['email'] = $contactTags['email'];
-        $tags[] = VIEWED_SUBSCRIPTION_PAGE;
-        $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
-        $tags[] = PAIDPLAN_CATEGORY.$this->app;
-        $tags[] = PAIDPLAN_PRODUCT.$this->platform;
-        $tags[] = FULLPRICE_PAIDPLAN;
-        $tags[] = PAIDPLAN."$plan->name-$this->app";
-        $tags[] = CUSTOMER;
-        $tags[] = DISCOUNT_PAIDPLAN;
-        $tags[] = SINGLEPRODUCT_PAIDPLAN;
-        $tags[] = MULTIPLEPRODUCT_PAIDPLAN;
-
-       
-
-        $this->activecampaign->removeTags($tags);
-        $contactTags[] = FREEMIUM;
-        $contactTags[] = PLAN_FREE.$this->app;
-
-        $this->activecampaign->addTags($requiredTags, $contactTags);
-    }
-
-    public function onUninstall($contactTags,  $plan){
-        $requiredTags = ['email'];
-
-        $uninstallTags['email'] = $contactTags['email'];
-        $uninstallTags[] = VIEWED_SUBSCRIPTION_PAGE;
-        $uninstallTags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
-        $uninstallTags[] = PAIDPLAN_CATEGORY.$this->app;
-        $uninstallTags[] = PAIDPLAN_PRODUCT.$this->platform;
-        $uninstallTags[] = FULLPRICE_PAIDPLAN;
-        $uninstallTags[] = PAIDPLAN."$plan->name-$this->app";
-        $uninstallTags[] = CUSTOMER;
-        $uninstallTags[] = DISCOUNT_PAIDPLAN;
-        $uninstallTags[] = SINGLEPRODUCT_PAIDPLAN;
-        $uninstallTags[] = MULTIPLEPRODUCT_PAIDPLAN;
-        $uninstallTags[] = FREEMIUM;
-        $uninstallTags[] = PLAN_FREE.$this->app;
-        $this->activecampaign->removeTags($uninstallTags);
-
-        $contactTags[] = UNINSTALL.$this->app;
-        $this->activecampaign->addTags($requiredTags, $contactTags);
-
-
     }
 
 }

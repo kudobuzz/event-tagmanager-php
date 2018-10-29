@@ -58,13 +58,13 @@ try{
 adding tags on install
 ```
 
-    $requiredTags = [
+    $contactTags = [
         'email'=>'elijah@kudobuzz.com',
         'location'=>'Ghana',
         'country_code'=>'GH'
     ];
 
-    $eventTagManger->addTagsOnInstall($requiredTags);
+    $eventTagManger->addTagsOnInstall($contactTags);
 ```
 
 You can pass additional tags, by default these tags are added  when you call `addTagsOnInstall` method on install
@@ -75,14 +75,14 @@ freemium
 plan-free-{app}
 ```
 <br><br>
-adding tags on upgrade
+adding and removing tags on upgrade
 ```
-    $requiredTags = [
+    $contactTags = [
         'email'=>'test@kudobuzz.com'
     ];
 
     $plan = (object) ['name'=>'pro'];
-    $test = $eventTagManger->addTagsOnUpgrade($requiredTags,$plan);
+    $test = $eventTagManger->addTagsOnUpgrade($contactTags,$plan);
 ```
 You can pass additional tags, by default these tags are added on upgrade when you call `addTagsOnUpgrade` method 
 ```
@@ -103,4 +103,32 @@ freemium
 
 //set discount key with value 1 to add discount tag to contact $plan = (object) ['name'=>'pro’, ‘discount’=>1];
  discount-paidplan
+```
+
+
+<br><br>
+adding and removing tags on plan downgrade to free plan
+```
+    $contactTags = [
+        'email'=>'test@kudobuzz.com'
+    ];
+
+    $plan = (object) ['name'=>'pro'];
+    $eventTagManger->downgradeToFreemium($contactTags,$plan);
+```
+You can pass additional tags, by default these tags are added on upgrade when you call `downgradeToFreemium` method 
+```
+plan-free-{app}
+freemium
+
+
+//by default these tags are removed 
+viewed-subscription-page
+initiated-subscription-checkout
+paidplan-category-{app}
+paidplan-product-{platform}
+price-fullprice-paidplan
+singleproduct-paidplan/multipleproduct-paidplan
+paidplan-{planname}-seodoctor
+customer
 ```
