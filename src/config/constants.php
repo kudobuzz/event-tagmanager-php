@@ -15,6 +15,7 @@ define("MULTIPLEPRODUCT_PAIDPLAN", "multipleproduct-paidplan");
 define("PAIDPLAN", "paidplan-{planname}-");
 define("PLAN_FREE", "plan-free-");
 define("CUSTOMER", "customer");
+define("UNINSTALL_SEODOCTOR", "uninstall-seodoctor");
 
 define("ENV_VARIABLES", serialize([
     'ACTIVECAMPAIGN_API_URL', 'ACTIVECAMPAIGN_API_KEY'

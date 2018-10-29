@@ -117,4 +117,28 @@ class EventTagManger {
         $this->activecampaign->addTags($requiredTags, $contactTags);
     }
 
+    public function onUninstall($contactTags,  $plan){
+        $requiredTags = ['email'];
+
+        $uninstallTags['email'] = $contactTags['email'];
+        $uninstallTags[] = VIEWED_SUBSCRIPTION_PAGE;
+        $uninstallTags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
+        $uninstallTags[] = PAIDPLAN_CATEGORY.$this->app;
+        $uninstallTags[] = PAIDPLAN_PRODUCT.$this->platform;
+        $uninstallTags[] = FULLPRICE_PAIDPLAN;
+        $uninstallTags[] = "paidplan-$plan->name-$this->app";
+        $uninstallTags[] = CUSTOMER;
+        $uninstallTags[] = DISCOUNT_PAIDPLAN;
+        $uninstallTags[] = SINGLEPRODUCT_PAIDPLAN;
+        $uninstallTags[] = MULTIPLEPRODUCT_PAIDPLAN;
+        $uninstallTags[] = FREEMIUM;
+        $uninstallTags[] = PLAN_FREE.$this->app;
+        $this->activecampaign->removeTags($uninstallTags);
+
+        $contactTags[] = UNINSTALL_SEODOCTOR;
+        $this->activecampaign->addTags($requiredTags, $contactTags);
+
+
+    }
+
 }
