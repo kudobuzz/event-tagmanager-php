@@ -65,4 +65,10 @@ adding tags on install
 
     $eventTagManger->addTagsOnInstall($requiredTags);
 ```
-You can pass additional tages by default these tags are added 
+
+You can pass additional tags, by default these tags are added on install
+"interest-category-{platform}”
+"interest-product-{app}”
+“freemium”
+"plan-free-{app}"
+
