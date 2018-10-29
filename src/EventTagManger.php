@@ -50,7 +50,7 @@ class EventTagManger extends EventTagMangerlib {
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade']);
         $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
-        $this->activecampaign->eventTagsAdd($contact);
+        $this->activecampaign->addTags($contact);
 
     }
 
