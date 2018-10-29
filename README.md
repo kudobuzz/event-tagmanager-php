@@ -67,7 +67,7 @@ adding tags on install
     $eventTagManger->addTagsOnInstall($requiredTags);
 ```
 
-You can pass additional tags, by default these tags are added  when you call addTagsOnInstall method on install
+You can pass additional tags, by default these tags are added  when you call `addTagsOnInstall` method on install
 ```
 interest-category-{platform}
 interest-product-{app}
@@ -84,7 +84,7 @@ adding tags on upgrade
     $plan = (object) ['name'=>'pro'];
     $test = $eventTagManger->addTagsOnUpgrade($requiredTags,$plan);
 ```
-You can pass additional tags, by default these tags are added on upgrade when you call addTagsOnUpgrade method 
+You can pass additional tags, by default these tags are added on upgrade when you call `addTagsOnUpgrade` method 
 ```
 viewed-subscription-page
 initiated-subscription-checkout
