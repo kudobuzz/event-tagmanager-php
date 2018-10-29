@@ -43,8 +43,8 @@ class EventTagManger {
             'country_code'    
         ];
     
-        $contactTags[] = "interest-category-$this->app";
-        $contactTags[] = "interest-product-$this->platform";
+        $contactTags[] = INTEREST_CATEGORY.$this->app;
+        $contactTags[] = INTEREST_PRODUCT.$this->platform;
         $contactTags[] = FREEMIUM;
         $contactTags[] = PLAN_FREE.$this->app;
 
@@ -62,7 +62,7 @@ class EventTagManger {
         $contactTags[] = PAIDPLAN_CATEGORY.$this->app;
         $contactTags[] = PAIDPLAN_PRODUCT.$this->platform;
         $contactTags[] = FULLPRICE_PAIDPLAN;
-        $contactTags[] = "paidplan-$plan->name-$this->app";
+        $contactTags[] = PAIDPLAN.$plan->name-$this->app;
         $contactTags[] = CUSTOMER;
 
         if(isset($plan->discount) and $plan->discount == 1){
@@ -126,7 +126,7 @@ class EventTagManger {
         $uninstallTags[] = PAIDPLAN_CATEGORY.$this->app;
         $uninstallTags[] = PAIDPLAN_PRODUCT.$this->platform;
         $uninstallTags[] = FULLPRICE_PAIDPLAN;
-        $uninstallTags[] = "paidplan-$plan->name-$this->app";
+        $uninstallTags[] = PAIDPLAN.$plan->name-$this->app;
         $uninstallTags[] = CUSTOMER;
         $uninstallTags[] = DISCOUNT_PAIDPLAN;
         $uninstallTags[] = SINGLEPRODUCT_PAIDPLAN;

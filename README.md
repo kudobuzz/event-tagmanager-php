@@ -54,3 +54,15 @@ try{
 
 ```
 
+adding tags on install
+```
+
+    $requiredTags = [
+        'email'=>'elijah@kudobuzz.com',
+        'location'=>'Ghana',
+        'country_code'=>'GH'
+    ];
+
+    $eventTagManger->addTagsOnInstall($requiredTags);
+```
+You can pass additional tages by default these tags are added 

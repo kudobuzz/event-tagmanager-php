@@ -12,10 +12,12 @@ define("PAIDPLAN_PRODUCT", "paidplan-product-");
 define("FULLPRICE_PAIDPLAN", "fullprice-paidplan");
 define("DISCOUNT_PAIDPLAN", "discount-paidplan");
 define("MULTIPLEPRODUCT_PAIDPLAN", "multipleproduct-paidplan");
-define("PAIDPLAN", "paidplan-{planname}-");
+define("PAIDPLAN", "paidplan-");
 define("PLAN_FREE", "plan-free-");
 define("CUSTOMER", "customer");
 define("UNINSTALL_SEODOCTOR", "uninstall-seodoctor");
+define("INTEREST_CATEGORY", "interest-category-");
+define("INTEREST_PRODUCT", "interest-product-");
 
 define("ENV_VARIABLES", serialize([
     'ACTIVECAMPAIGN_API_URL', 'ACTIVECAMPAIGN_API_KEY'
