@@ -67,8 +67,10 @@ adding tags on install
 ```
 
 You can pass additional tags, by default these tags are added on install
-"interest-category-{platform}”
-"interest-product-{app}”
-“freemium”
-"plan-free-{app}"
+```
+interest-category-{platform}
+interest-product-{app}
+freemium
+plan-free-{app}
+```
 
