@@ -20,7 +20,7 @@ require_once "src/EventTagManger.php";
 
 Next, create a class instance of EventTagManger:
 
-$et = new EventTagManger(['app'=>'appname','platform'=>'platformname']);
+$eventTagManger = new EventTagManger(['app'=>'appname','platform'=>'platformname']);
 
 example app name can be `seodoctor` and platfrom can be `shopify`
 
