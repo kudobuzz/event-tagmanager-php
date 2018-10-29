@@ -48,7 +48,7 @@ class EventTagMangerlib{
 
     }
 
-    public function eventTagsRemove(){
+    public function eventTagsRemove($event){
         
         if($event->name == 'upgrade'){
 
