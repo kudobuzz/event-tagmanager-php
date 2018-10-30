@@ -104,13 +104,14 @@ class EventTagMangerlib{
         $data[SINGLEPRODUCT_PAIDPLAN] = array_search(SINGLEPRODUCT_PAIDPLAN, $userTags);
         $data[MULTIPLEPRODUCT_PAIDPLAN] = array_search(MULTIPLEPRODUCT_PAIDPLAN, $userTags);
 
-        if($data[SINGLEPRODUCT_PAIDPLAN] === false || $data[MULTIPLEPRODUCT_PAIDPLAN] === false){
-            $tagsToAdd['tags'][] = SINGLEPRODUCT_PAIDPLAN;
+        if($data[SINGLEPRODUCT_PAIDPLAN] == false && $data[MULTIPLEPRODUCT_PAIDPLAN] == false){
+            $tagsToAdd[] = SINGLEPRODUCT_PAIDPLAN;
         }
 
         //add tag multiple product paid plan if user has tag single product paid plan and remove sigle product paid plan tag
-        if($data[SINGLEPRODUCT_PAIDPLAN] != false || $data[MULTIPLEPRODUCT_PAIDPLAN] === false){
-            $tagsToAdd['tags'][] = MULTIPLEPRODUCT_PAIDPLAN;
+        if($data[SINGLEPRODUCT_PAIDPLAN] != false && $data[MULTIPLEPRODUCT_PAIDPLAN] == false){
+    
+            $tagsToAdd[] = MULTIPLEPRODUCT_PAIDPLAN;
         }
 
         return $tagsToAdd;
