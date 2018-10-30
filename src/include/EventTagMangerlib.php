@@ -2,8 +2,11 @@
 class EventTagMangerlib{
 
 
-    public function eventTagsAdd($event){
+    public function eventTagsAdd($event, $plan = null){
 
+        if($plan != null){
+            $plan->name = strtolower($plan->name);
+        }
 
         if($event->name == 'install'){
 
@@ -48,7 +51,12 @@ class EventTagMangerlib{
 
     }
 
-    public function eventTagsRemove($event){
+    public function eventTagsRemove($event, $plan = null){
+
+        if($plan != null){
+            $plan->name = strtolower($plan->name);
+        }
+
         
         if($event->name == 'upgrade'){
 

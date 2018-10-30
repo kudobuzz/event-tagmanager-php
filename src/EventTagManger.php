@@ -1,5 +1,6 @@
 <?php 
 require_once("src/require.php");
+
 class EventTagManger extends EventTagMangerlib {
 
 
@@ -45,10 +46,10 @@ class EventTagManger extends EventTagMangerlib {
     public function onUpgrade($contact, $plan){
 
         $removeTags['email'] = $contact['email'];
-        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'upgrade']);
+        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'upgrade'],  $plan);
         $this->activecampaign->removeTags($removeTags);
 
-        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade']);
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade'], $plan);
         $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
         $this->activecampaign->addTags($contact);
 
@@ -58,21 +59,21 @@ class EventTagManger extends EventTagMangerlib {
     public function downgradeToFreemium($contact,  $plan){
 
         $removeTags['email'] = $contact['email'];
-        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'downgrade']);
+        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'downgrade'], $plan);
         $this->activecampaign->removeTags($removeTags);
        
 
-        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade']);
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade'],  $plan);
         $this->activecampaign->addTags($contact);
     }
 
     public function onUninstall($contact,  $plan){
 
         $removeTags['email'] = $contact['email'];
-        $removeTags['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade']);
+        $removeTags['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade'],  $plan);
         $this->activecampaign->removeTags($removeTags);
 
-        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'uninstall']);
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'uninstall'],  $plan);
         $this->activecampaign->addTags($contact);
 
 
