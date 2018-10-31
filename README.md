@@ -108,13 +108,14 @@ customer
 ```
 
 
-by default these tags are removed 
-plan-free-{app}
-freemium
+by default these tags are removed <br>
+plan-free-{app} <br>
+freemium <br>
 
 
-//set discount key with value 1 to add discount tag to contact $plan = (object) ['name'=>'pro’, ‘discount’=>1];
- discount-paidplan
+set discount key with value 1 to add discount tag to contact $plan = (object) ['name'=>'pro’, ‘discount’=>1];
+```
+discount-paidplan
 ```
 
 
@@ -133,9 +134,11 @@ You can pass additional tags, by default these tags are added on upgrade when yo
 ```
 plan-free-{app}
 freemium
-
 ```
+
+
 by default these tags are removed 
+```
 viewed-subscription-page
 initiated-subscription-checkout
 paidplan-category-{app}
