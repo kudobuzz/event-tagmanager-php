@@ -83,7 +83,7 @@ adding and removing tags on upgrade
     $contact = [
         'email'=>'elijah@kudobuzz.com'
     ];
-    $plan = (object) ['name'=>'pro'];
+    $plan = (object) ['name'=>'plan name'];
     $eventTagManger->onUpgrade($contact, $plan);
 ```
 You can pass additional tags, by default these tags are added on upgrade when you call `addTagsOnUpgrade` method 
@@ -94,7 +94,7 @@ paidplan-category-{app}
 paidplan-product-{platform}
 price-fullprice-paidplan
 singleproduct-paidplan/multipleproduct-paidplan
-paidplan-{planname}-seodoctor
+paidplan-{planname}-{app}
 customer
 
 
@@ -115,7 +115,8 @@ adding and removing tags on plan downgrade to free plan
         'email'=>'test@kudobuzz.com'
     ];
 
-    $plan = (object) ['name'=>'pro'];
+
+    $plan = (object) ['name'=>'plan name'];
     $eventTagManger->downgradeToFreemium($contact,$plan);
 ```
 You can pass additional tags, by default these tags are added on upgrade when you call `downgradeToFreemium` method 
@@ -131,6 +132,6 @@ paidplan-category-{app}
 paidplan-product-{platform}
 price-fullprice-paidplan
 singleproduct-paidplan/multipleproduct-paidplan
-paidplan-{planname}-seodoctor
+paidplan-{planname}-{app}
 customer
 ```

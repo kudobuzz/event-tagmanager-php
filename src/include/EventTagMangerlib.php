@@ -18,6 +18,10 @@ class EventTagMangerlib{
 
         if($event->name == 'upgrade'){
             
+            if(empty($plan->name)  || $plan->name == null){
+                throw new Exception("plan name must be set");
+            }
+            
             $tags[] = VIEWED_SUBSCRIPTION_PAGE;
             $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
             $tags[] = PAIDPLAN_CATEGORY.$this->app;
@@ -44,7 +48,7 @@ class EventTagMangerlib{
 
 
 
-
+        //sss
 
         return $tags;
 
@@ -65,6 +69,10 @@ class EventTagMangerlib{
         }
 
         if($event->name == 'downgrade'){
+
+            if(empty($plan->name)  || $plan->name == null){
+                throw new Exception("plan name must be set");
+            }
             
             $tags[] = VIEWED_SUBSCRIPTION_PAGE;
             $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
