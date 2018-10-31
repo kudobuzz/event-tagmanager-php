@@ -96,7 +96,7 @@ price-fullprice-paidplan
 singleproduct-paidplan/multipleproduct-paidplan
 paidplan-{planname}-{app}
 customer
-
+```
 <br>When user changes plan from plan A to plan B
 ```
     $plan = [
