@@ -55,6 +55,18 @@ class EventTagManger extends EventTagMangerlib {
 
     }
 
+    public function changePlan($contact, $plan){
+
+        $removeTags['email'] = $contact['email'];
+        $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'plan_change'],  (object) $plan->current);
+        $this->activecampaign->removeTags($removeTags);
+
+        $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade'], (object) $plan->new);
+        $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
+        $this->activecampaign->addTags($contact);
+
+    }
+
 
     public function downgradeToFreemium($contact,  $plan){
 
