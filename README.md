@@ -108,7 +108,7 @@ customer
 ```
 
 
-//by default these tags are removed 
+by default these tags are removed 
 plan-free-{app}
 freemium
 
@@ -134,8 +134,8 @@ You can pass additional tags, by default these tags are added on upgrade when yo
 plan-free-{app}
 freemium
 
-
-//by default these tags are removed 
+```
+by default these tags are removed 
 viewed-subscription-page
 initiated-subscription-checkout
 paidplan-category-{app}
