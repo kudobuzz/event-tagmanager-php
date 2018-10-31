@@ -130,7 +130,7 @@ adding and removing tags on plan downgrade to free plan
     $plan = (object) ['name'=>'plan name'];
     $eventTagManger->downgradeToFreemium($contact,$plan);
 ```
-You can pass additional tags, by default these tags are added on upgrade when you call `downgradeToFreemium` method 
+You can pass additional tags, by default these tags are added on downgrade when you call `downgradeToFreemium` method 
 ```
 plan-free-{app}
 freemium
