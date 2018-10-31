@@ -97,6 +97,16 @@ singleproduct-paidplan/multipleproduct-paidplan
 paidplan-{planname}-{app}
 customer
 
+<br>When user changes plan from plan A to plan B
+```
+    $plan = [
+        'current'=>['name'=>"A"],
+        'new'=>['name'=>'B']
+    ];
+    
+    $eventTagManger->changePlan($contact, $plan);
+```
+
 
 //by default these tags are removed 
 plan-free-{app}

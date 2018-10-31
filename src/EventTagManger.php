@@ -44,7 +44,7 @@ class EventTagManger extends EventTagMangerlib {
 
     //add tags when user is on pricing page
     public function onUpgrade($contact, $plan){
-
+        $plan = (object) $plan;
         $removeTags['email'] = $contact['email'];
         $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'upgrade'],  $plan);
         $this->activecampaign->removeTags($removeTags);
@@ -56,7 +56,7 @@ class EventTagManger extends EventTagMangerlib {
     }
 
     public function changePlan($contact, $plan){
-
+        $plan = (object) $plan;
         $removeTags['email'] = $contact['email'];
         $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'plan_change'],  (object) $plan->current);
         $this->activecampaign->removeTags($removeTags);
@@ -69,7 +69,7 @@ class EventTagManger extends EventTagMangerlib {
 
 
     public function downgradeToFreemium($contact,  $plan){
-
+        $plan = (object) $plan;
         $removeTags['email'] = $contact['email'];
         $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'downgrade'], $plan);
         $this->activecampaign->removeTags($removeTags);
@@ -80,7 +80,7 @@ class EventTagManger extends EventTagMangerlib {
     }
 
     public function onUninstall($contact,  $plan){
-
+        $plan = (object) $plan;
         $removeTags['email'] = $contact['email'];
         $removeTags['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade'],  $plan);
         $this->activecampaign->removeTags($removeTags);
