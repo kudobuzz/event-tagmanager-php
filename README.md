@@ -109,11 +109,13 @@ customer
 
 
 by default these tags are removed <br>
-plan-free-{app} <br>
-freemium <br>
+```
+plan-free-{app} 
+freemium 
+```
 
 
-set discount key with value 1 to add discount tag to contact $plan = (object) ['name'=>'pro’, ‘discount’=>1];
+set discount key with value 1 to add discount tag to contact `$plan = (object) ['name'=>'pro’, ‘discount’=>1];`
 ```
 discount-paidplan
 ```
