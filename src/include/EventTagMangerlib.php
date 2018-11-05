@@ -62,6 +62,8 @@ class EventTagMangerlib{
             }
             
             $tags = array_merge($tags , $this->planTags($plan ));
+            $tags[] = VIEWED_SUBSCRIPTION_PAGE;
+            $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
 
             if($event->name == 'downgrade' ){
                 $tags = array_merge($tags , $this->upgradeTags($plan));
@@ -102,8 +104,6 @@ class EventTagMangerlib{
 
     public function planTags($plan){
         
-        $tags[] = VIEWED_SUBSCRIPTION_PAGE;
-        $tags[] = INITIATED_SUBSCRIPTION_CHECKOUT;
         $tags[] = PAIDPLAN_CATEGORY.$this->app;
         $tags[] = PAIDPLAN_PRODUCT.$this->platform;
         $tags[] = FULLPRICE_PAIDPLAN;

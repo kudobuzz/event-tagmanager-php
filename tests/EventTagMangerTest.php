@@ -28,7 +28,7 @@ class EventTagMangerTest extends TestCase{
 
     public function testeventTagsAddUpgrade(){
 
-        $expected = '["viewed-subscription-page","initiated-subscription-checkout","paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer"]';
+        $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer"]';
         
         $plan = (object) ['name'=>'Pro'];
         $tag = (object) ['name'=>'upgrade'];
@@ -87,7 +87,7 @@ class EventTagMangerTest extends TestCase{
 
     public function testeventTagsRemoveDowngrade(){
 
-        $expected = '["viewed-subscription-page","initiated-subscription-checkout","paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan"]';
+        $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","viewed-subscription-page","initiated-subscription-checkout","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan"]';
         
         $tag = (object) ['name'=>'downgrade'];
         $plan = (object) ['name'=>'Pro'];
@@ -103,7 +103,7 @@ class EventTagMangerTest extends TestCase{
 
     public function testeventTagsRemoveUninstall(){
 
-        $expected = '["viewed-subscription-page","initiated-subscription-checkout","paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan--seodoctor","customer","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan","freemium","plan-free-seodoctor"]';
+        $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan--seodoctor","customer","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan","freemium","plan-free-seodoctor"]';
         
         $tag = (object) ['name'=>'uninstall'];
         $response = json_encode($this->eventTagManger->eventTagsRemove($tag));
@@ -117,7 +117,7 @@ class EventTagMangerTest extends TestCase{
        
     public function testsingleOrMultipleProduct(){
 
-        $expected = '["viewed-subscription-page","initiated-subscription-checkout","paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","singleproduct-paidplan"]';
+        $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","singleproduct-paidplan"]';
         $tag = (object) ['name'=>'upgrade'];
         $plan = (object) ['name'=>'Pro'];
 
