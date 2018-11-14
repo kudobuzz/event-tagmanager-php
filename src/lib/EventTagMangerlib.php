@@ -1,4 +1,7 @@
 <?php
+namespace Kudobuzz\EventTagMangerPhp\lib;
+
+
 class EventTagMangerlib{
 
 

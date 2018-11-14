@@ -1,6 +1,3 @@
 <?php
-require_once("vendor/activecampaign/api-php/includes/ActiveCampaign.class.php");
-require_once("src/config/constants.php");
-require_once("src/include/Validation.php");
-require_once("src/include/ActiveCampaignLib.php");
-require_once("src/include/EventTagMangerlib.php");
+require __DIR__ . "/../vendor/autoload.php";
+require __DIR__ . "/config/constants.php";

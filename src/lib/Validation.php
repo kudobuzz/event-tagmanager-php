@@ -1,4 +1,6 @@
 <?php
+namespace Kudobuzz\EventTagmangerPHP\lib;
+
 class Validation{
 
 
@@ -15,7 +17,7 @@ class Validation{
     
         if (count($missingVariable) > 0) {
             
-            throw new Exception(json_encode($missingVariable));
+            throw new \Exception(json_encode($missingVariable));
             exit();
         }
     }
@@ -36,7 +38,7 @@ class Validation{
             }
             $errorMessage .= " field is required";
 
-            throw new Exception($errorMessage);
+            throw new \Exception($errorMessage);
 
         }
     }

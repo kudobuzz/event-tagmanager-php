@@ -1,5 +1,12 @@
-<?php 
-require_once("src/require.php");
+<?php
+
+namespace Kudobuzz\EventTagMangerPhp;
+
+require __DIR__ . "/require.php";
+
+
+use Kudobuzz\EventTagMangerPhp\lib\EventTagMangerlib;
+use Kudobuzz\EventTagMangerPhp\lib\ActiveCampaignLib;
 
 class EventTagManger extends EventTagMangerlib {
 
@@ -31,7 +38,7 @@ class EventTagManger extends EventTagMangerlib {
 
         $contactDetails['list_id'] = LIST_ID;
 
-        $this->activecampaign->addNewContact($requiredDetails, $contactDetails);
+        return $this->activecampaign->addNewContact($requiredDetails, $contactDetails);
     }
 
     //add tags to contact on activecampaign
@@ -51,8 +58,8 @@ class EventTagManger extends EventTagMangerlib {
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade'], $plan);
         $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
-        $this->activecampaign->addTags($contact);
 
+        return $this->activecampaign->addTags($contact);
     }
 
     public function changePlan($contact, $plan){
@@ -63,7 +70,8 @@ class EventTagManger extends EventTagMangerlib {
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'upgrade'], (object) $plan->new);
         $contact['tags'] = $this->singleOrMultipleProduct($contact['tags'], $this->getTags($contact['email']));
-        $this->activecampaign->addTags($contact);
+
+        return $this->activecampaign->addTags($contact);
 
     }
 
@@ -76,7 +84,8 @@ class EventTagManger extends EventTagMangerlib {
        
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade'],  $plan);
-        $this->activecampaign->addTags($contact);
+
+        return $this->activecampaign->addTags($contact);
     }
 
     public function onUninstall($contact,  $plan){
@@ -86,9 +95,8 @@ class EventTagManger extends EventTagMangerlib {
         $this->activecampaign->removeTags($removeTags);
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'uninstall'],  $plan);
-        $this->activecampaign->addTags($contact);
 
-
+        return $this->activecampaign->addTags($contact);
     }
 
     public function addTag($contact){
