@@ -2,9 +2,6 @@
 
 namespace Kudobuzz\EventTagMangerPhp;
 
-require __DIR__ . "/require.php";
-
-
 use Kudobuzz\EventTagMangerPhp\lib\EventTagMangerlib;
 use Kudobuzz\EventTagMangerPhp\lib\ActiveCampaignLib;
 
