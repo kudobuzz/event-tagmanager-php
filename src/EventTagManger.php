@@ -3,6 +3,7 @@
 namespace Kudobuzz\EventTagMangerPhp;
 
 use Kudobuzz\EventTagMangerPhp\lib\EventTagMangerlib;
+use Kudobuzz\EventTagMangerPhp\lib\ActiveCampaignLib;
 
 class EventTagManger extends EventTagMangerlib {
 
