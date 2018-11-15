@@ -3,7 +3,6 @@
 namespace Kudobuzz\EventTagMangerPhp;
 
 use Kudobuzz\EventTagMangerPhp\lib\EventTagMangerlib;
-use Kudobuzz\EventTagMangerPhp\lib\ActiveCampaignLib;
 
 class EventTagManger extends EventTagMangerlib {
 
@@ -78,7 +77,7 @@ class EventTagManger extends EventTagMangerlib {
         $removeTags['email'] = $contact['email'];
         $removeTags['tags'] = $this->eventTagsRemove((object) ['name'=>'downgrade'], $plan);
         $this->activecampaign->removeTags($removeTags);
-       
+
 
         $contact['tags'] = $this->eventTagsAdd((object) ['name'=>'downgrade'],  $plan);
 
@@ -103,7 +102,7 @@ class EventTagManger extends EventTagMangerlib {
 
     //get user tags
     public function getTags($email){
-    
+
         return  $this->activecampaign->getTags($email);;
     }
 
