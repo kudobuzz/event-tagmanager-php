@@ -1,5 +1,6 @@
 <?php
-require_once "src/EventTagManger.php";
+
+use Kudobuzz\EventTagMangerPhp\EventTagManger;
 
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +21,7 @@ class EventTagMangerTest extends TestCase{
         $response = json_encode($this->eventTagManger->eventTagsAdd((object) ['name'=>'install']));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get install tags {$response}"
         );
@@ -29,13 +30,13 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsAddUpgrade(){
 
         $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer"]';
-        
+
         $plan = (object) ['name'=>'Pro'];
         $tag = (object) ['name'=>'upgrade'];
         $response = json_encode($this->eventTagManger->eventTagsAdd($tag, $plan));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get upgrade tags {$response}"
         );
@@ -44,12 +45,12 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsAdddowngrade(){
 
         $expected = '["freemium","plan-free-seodoctor"]';
-        
+
         $tag = (object) ['name'=>'downgrade'];
         $response = json_encode($this->eventTagManger->eventTagsAdd($tag));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get downgrade tags {$response}"
         );
@@ -59,12 +60,12 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsAddUninstall(){
 
         $expected = '["uninstall-seodoctor"]';
-        
+
         $tag = (object) ['name'=>'uninstall'];
         $response = json_encode($this->eventTagManger->eventTagsAdd($tag));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get uninstall tags {$response}"
         );
@@ -73,12 +74,12 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsRemoveUpgrade(){
 
         $expected = '["freemium","plan-free-seodoctor"]';
-        
+
         $tag = (object) ['name'=>'upgrade'];
         $response = json_encode($this->eventTagManger->eventTagsRemove($tag));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get tags to remove on upgrade {$response}"
         );
@@ -88,13 +89,13 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsRemoveDowngrade(){
 
         $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","viewed-subscription-page","initiated-subscription-checkout","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan"]';
-        
+
         $tag = (object) ['name'=>'downgrade'];
         $plan = (object) ['name'=>'Pro'];
         $response = json_encode($this->eventTagManger->eventTagsRemove($tag, $plan));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get tags to remove on downgrade {$response}"
         );
@@ -104,17 +105,17 @@ class EventTagMangerTest extends TestCase{
     public function testeventTagsRemoveUninstall(){
 
         $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan--seodoctor","customer","discount-paidplan","singleproduct-paidplan","multipleproduct-paidplan","freemium","plan-free-seodoctor"]';
-        
+
         $tag = (object) ['name'=>'uninstall'];
         $response = json_encode($this->eventTagManger->eventTagsRemove($tag));
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get tags to remove on uninstall {$response}"
         );
     }
-       
+
     public function testsingleOrMultipleProduct(){
 
         $expected = '["paidplan-category-seodoctor","paidplan-product-shopify","fullprice-paidplan","paidplan-pro-seodoctor","customer","singleproduct-paidplan"]';
@@ -127,7 +128,7 @@ class EventTagMangerTest extends TestCase{
 
 
         $this->assertEquals(
-            $expected, 
+            $expected,
             $response,
             "get tags to remove on uninstall {$response}"
         );

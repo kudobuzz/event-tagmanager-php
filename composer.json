@@ -1,24 +1,33 @@
 {
-    "name": "kudobuzz/event-tagmanger-php",
-    "description": "Event tag manger for kudobuzz users",
-    "keywords": ["tagmanger"],
-    "license": "",
-    "authors": [
-        {
-            "name": "kudobuzz"
-        }
-    ],
-    "type": "project",
-    "require": {
-		"php": ">=7.1",
-        "activecampaign/api-php": "^2.0"
-    },
-    "require-dev": {
-		"phpunit/phpunit": "6.*"
-    },
-    "autoload": {
-        "psr-4": {
-            "kudobuzz\\event-tagmanger-php\\": "src/"
-        }
+  "name": "kudobuzz/event-tagmanger-php",
+  "description": "Event tag manger for kudobuzz users",
+  "keywords": [
+    "tagmanger"
+  ],
+  "license": "",
+  "authors": [
+    {
+      "name": "kudobuzz"
     }
+  ],
+  "type": "library",
+  "require": {
+    "php": ">=7.1",
+    "activecampaign/api-php": "^2.0",
+    "vlucas/phpdotenv": "^2.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "6.*"
+  },
+  "autoload": {
+    "files": [
+      "src/config/constants.php"
+    ],
+    "psr-4": {
+      "Kudobuzz\\EventTagMangerPhp\\": "src/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
 }
