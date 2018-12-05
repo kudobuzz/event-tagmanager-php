@@ -25,15 +25,15 @@ class EventTagManger extends EventTagMangerlib {
 
     //add contact to activecampaign
     public function addContact($contactDetails) {
-
+        $list_id = LIST_ID;
         $requiredDetails = [
             'email',
             'first_name',
             'last_name',
-            'list_id'
+            "p[{$list_id}]"
         ];
 
-        $contactDetails['list_id'] = LIST_ID;
+        $contactDetails["p[{$list_id}]"] = $list_id;
 
         return $this->activecampaign->addNewContact($requiredDetails, $contactDetails);
     }
