@@ -107,10 +107,12 @@ class EventTagMangerlib{
 
     public function planTags($plan){
         
+        $planName = isset($plan) ? $plan->name : '';
+
         $tags[] = PAIDPLAN_CATEGORY.$this->app;
         $tags[] = PAIDPLAN_PRODUCT.$this->platform;
         $tags[] = FULLPRICE_PAIDPLAN;
-        $tags[] = PAIDPLAN."$plan->name-$this->app";
+        $tags[] = PAIDPLAN."$planName-$this->app";
         $tags[] = CUSTOMER;
 
         return $tags;
