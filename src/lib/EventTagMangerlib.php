@@ -22,7 +22,7 @@ class EventTagMangerlib{
         if($event->name == 'upgrade'){
             
             if(empty($plan->name)  || $plan->name == null){
-                throw new Exception("plan name must be set");
+                throw new \Exception("plan name must be set");
             }
             
             $tags = array_merge($tags , $this->planTags($plan ));
@@ -61,7 +61,7 @@ class EventTagMangerlib{
         if($event->name == 'downgrade' || $event->name == 'plan_change'){
 
             if(empty($plan->name)  || $plan->name == null){
-                throw new Exception("plan name must be set");
+                throw new \Exception("plan name must be set");
             }
             
             $tags = array_merge($tags , $this->planTags($plan ));
