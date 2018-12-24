@@ -27,7 +27,7 @@ class ActiveCampaignLib extends Validation
 
         if (!(int)$contact_sync->success) {
             // request failed
-            throw new Excepgtion($contact_sync->error);
+            throw new \Exception($contact_sync->error);
         }
 
         return $contact_sync;
