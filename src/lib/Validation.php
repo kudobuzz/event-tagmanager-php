@@ -10,7 +10,7 @@ class Validation{
 
         $missingVariable = [];
         foreach ($neededKeys as $key) {
-            if (!array_key_exists($key, getenv())) {
+            if (!array_key_exists($key, $_ENV)) {
                 $missingVariable[] = $key . ' is not set';
             }
         }
